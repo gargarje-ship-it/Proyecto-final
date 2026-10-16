@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Proyecto final: asistente de compra de portátiles con respuestas fundamentadas en fuentes."
+    >
+    <title>Portátil ideal para tu día a día · Entregable</title>
+    <style>
+      :root {
+        color: #172b35;
+        background: #eef2f1;
+        font-family: "Segoe UI", Arial, sans-serif;
+        font-synthesis: none;
+        font-size: 10pt;
+        line-height: 1.5;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      a {
+        color: #087f71;
+        text-decoration-thickness: 0.7pt;
+        text-underline-offset: 2pt;
+        overflow-wrap: anywhere;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: #172b35;
+        line-height: 1.18;
+      }
+
+      h1 {
+        margin-bottom: 10pt;
+        font-size: 26pt;
+        letter-spacing: -0.7pt;
+      }
+
+      h2 {
+        margin-bottom: 8pt;
+        font-size: 19pt;
+        letter-spacing: -0.35pt;
+      }
+
+      h3 {
+        margin-bottom: 4pt;
+        font-size: 11pt;
+      }
+
+      p {
+        margin-bottom: 7pt;
+      }
+
+      .sheet {
+        position: relative;
+        display: flex;
+        min-height: 267mm;
+        flex-direction: column;
+        padding: 1mm 0;
+        break-after: page;
+        page-break-after: always;
+      }
+
+      .sheet:last-child {
+        break-after: auto;
+        page-break-after: auto;
+      }
+
+      .running-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12pt;
+        margin-bottom: 15pt;
+        padding-bottom: 7pt;
+        border-bottom: 1px solid #d9e2e2;
+        color: #718187;
+        font-size: 8pt;
+        letter-spacing: 0.5pt;
+        text-transform: uppercase;
+      }
+
+      .kicker {
+        margin-bottom: 7pt;
+        color: #087f71;
+        font-size: 8pt;
+        font-weight: 700;
+        letter-spacing: 1.4pt;
+        text-transform: uppercase;
+      }
+
+      .muted {
+        color: #65767c;
+      }
+
+      .cover {
+        justify-content: center;
+      }
+
+      .cover .cover-mark {
+        width: 48pt;
+        height: 48pt;
+        display: grid;
+        place-items: center;
+        margin-bottom: 23pt;
+        border-radius: 13pt;
+        background: #087f71;
+        color: white;
+        font-size: 29pt;
+        font-weight: 700;
+      }
+
+      .cover h1 {
+        max-width: 155mm;
+        margin-bottom: 12pt;
+        font-size: 35pt;
+      }
+
+      .cover .subtitle {
+        max-width: 145mm;
+        margin-bottom: 32pt;
+        color: #53666d;
+        font-size: 14pt;
+        line-height: 1.55;
+      }
+
+      .cover-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 11pt;
+        max-width: 165mm;
+      }
+
+      .info-panel {
+        padding: 13pt 15pt;
+        border: 1px solid #dce5e5;
+        border-radius: 9pt;
+        background: #fff;
+      }
+
+      .info-panel.wide {
+        grid-column: 1 / -1;
+      }
+
+      .info-panel h2 {
+        margin-bottom: 5pt;
+        color: #087f71;
+        font-size: 9pt;
+        letter-spacing: 0.8pt;
+        text-transform: uppercase;
+      }
+
+      .info-panel p {
+        margin: 0;
+        color: #465b62;
+        font-size: 10pt;
+      }
+
+      .cover-foot {
+        position: absolute;
+        right: 0;
+        bottom: 3mm;
+        left: 0;
+        display: flex;
+        justify-content: space-between;
+        padding-top: 8pt;
+        border-top: 1px solid #d9e2e2;
+        color: #78888d;
+        font-size: 8pt;
+      }
+
+      .capture-title {
+        margin-bottom: 7pt;
+      }
+
+      .capture-title p {
+        margin: 0;
+        color: #65767c;
+      }
+
+      figure {
+        margin: 8pt 0 0;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      figure img {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: 223mm;
+        margin: 0 auto;
+        border: 1px solid #d9e2e2;
+        border-radius: 5pt;
+        object-fit: contain;
+        object-position: top center;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      figcaption {
+        margin-top: 7pt;
+        color: #43585f;
+        font-size: 9pt;
+        line-height: 1.45;
+      }
+
+      .capture-number {
+        display: inline-block;
+        margin-right: 5pt;
+        color: #087f71;
+        font-family: Consolas, monospace;
+        font-size: 8pt;
+        font-weight: 700;
+      }
+
+      .check-list {
+        display: grid;
+        gap: 9pt;
+      }
+
+      .check-card {
+        padding: 11pt 13pt;
+        border: 1px solid #dce5e5;
+        border-radius: 8pt;
+        background: white;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .check-card .question {
+        margin-bottom: 5pt;
+        color: #172b35;
+        font-size: 10pt;
+        font-weight: 700;
+      }
+
+      .check-card .response {
+        margin-bottom: 5pt;
+        color: #42575e;
+      }
+
+      .check-card .sources {
+        margin-bottom: 0;
+        color: #596d73;
+        font-size: 9pt;
+      }
+
+      .verdict {
+        display: inline-block;
+        margin-right: 4pt;
+        color: #24714d;
+        font-weight: 700;
+      }
+
+      .caution {
+        margin-top: 11pt;
+        padding: 10pt 12pt;
+        border-left: 3px solid #d5a94e;
+        border-radius: 0 6pt 6pt 0;
+        background: #fcf7ea;
+        color: #675a3a;
+        font-size: 9pt;
+      }
+
+      .source-index {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6pt 12pt;
+        margin: 8pt 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .source-index li {
+        padding: 7pt 8pt;
+        border: 1px solid #e1e8e8;
+        border-radius: 5pt;
+        background: white;
+        font-size: 8.5pt;
+      }
+
+      .source-index strong {
+        color: #087f71;
+      }
+
+      .architecture {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10pt;
+      }
+
+      .architecture .info-panel {
+        min-height: 83pt;
+      }
+
+      .architecture .info-panel p,
+      .architecture .info-panel li {
+        font-size: 9.5pt;
+      }
+
+      .architecture ul {
+        margin: 6pt 0 0;
+        padding-left: 15pt;
+      }
+
+      .command-box {
+        margin: 6pt 0 0;
+        padding: 9pt 11pt;
+        border: 1px solid #dce5e5;
+        border-radius: 6pt;
+        background: #f4f7f6;
+        color: #263e45;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 9pt;
+        white-space: pre-wrap;
+      }
+
+      .small-note {
+        margin-top: 10pt;
+        color: #65767c;
+        font-size: 8.5pt;
+      }
+
+      @page {
+        size: A4;
+        margin: 15mm 14mm 15mm;
+      }
+
+      @media screen {
+        body {
+          padding: 12mm 0;
+        }
+
+        .sheet {
+          width: 182mm;
+          min-height: 267mm;
+          margin: 0 auto 10mm;
+          padding: 13mm 0;
+          background: #fff;
+          box-shadow: 0 3px 18px #173a4518;
+        }
+      }
+
+      @media print {
+        :root {
+          background: white;
+          print-color-adjust: exact;
+          -webkit-print-color-adjust: exact;
+        }
+
+        .sheet {
+          min-height: 267mm;
+        }
+
+        figure,
+        img,
+        .check-card,
+        .info-panel {
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="sheet cover" aria-labelledby="project-title">
+        <div class="cover-mark" aria-hidden="true">u</div>
+        <p class="kicker">Proyecto final · Aplicación con chat sobre datos</p>
+        <h1 id="project-title">Portátil ideal para tu día a día.</h1>
+        <p class="subtitle">
+          Elegir un portátil para estudiar, trabajar y hacer videollamadas puede
+          ser difícil cuando las especificaciones, los precios y los compromisos
+          de cada gama están repartidos en varias fuentes. Umbral compara tres
+          opciones y responde con fragmentos citados; si un dato no está
+          disponible, lo reconoce en lugar de inventarlo.
+        </p>
+        <div class="cover-grid">
+          <article class="info-panel wide">
+            <h2>De dónde salen los datos</h2>
+            <p>
+              Seis registros sintéticos incluidos en la maqueta: fichas técnicas
+              y registros de tienda ficticios de Nova Esencial 15, Atlas
+              Equilibrio 14 y Orbit Studio 16. La valoración de ejemplo está
+              documentada aparte en M01 · Metodología. No son ofertas reales ni
+              datos de mercado actuales.
+            </p>
+          </article>
+          <article class="info-panel">
+            <h2>Qué se entrega</h2>
+            <p>Chat con fuentes, reconocimiento de datos ausentes y biblioteca documental.</p>
+          </article>
+          <article class="info-panel">
+            <h2>Validación visual</h2>
+            <p>Cinco capturas de la aplicación real tomadas con Edge a 1366 × 900.</p>
+          </article>
+        </div>
+        <div class="cover-foot">
+          <span>UMBRAL · PORTÁTIL IDEAL PARA TU DÍA A DÍA</span>
+          <span>16 de octubre de 2026</span>
+        </div>
+      </section>
+
+      <section class="sheet capture-page" aria-labelledby="capture-1-title">
+        <div class="running-head"><span>01 · Chat</span><span>Comparación de gamas</span></div>
+        <header class="capture-title">
+          <p class="kicker">Respuesta con puntuaciones y trazabilidad</p>
+          <h2 id="capture-1-title">Una comparación para el uso cotidiano</h2>
+        </header>
+        <figure>
+          <img
+            src="capturas/01-comparacion.png"
+            alt="Respuesta del chat con las valoraciones de Nova, Atlas y Orbit y sus fuentes citadas."
+          >
+          <figcaption>
+            <span class="capture-number">CAPTURA 01</span>
+            Comparación para ofimática, estudio y videollamadas. La respuesta
+            muestra las puntuaciones 6,8/10, 8,7/10 y 8,1/10, recomienda Atlas
+            como valoración ilustrativa y cita M01 junto a las fichas técnicas.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="sheet capture-page" aria-labelledby="capture-2-title">
+        <div class="running-head"><span>02 · Chat</span><span>Precios de ejemplo</span></div>
+        <header class="capture-title">
+          <p class="kicker">Respuesta de seguimiento con historial</p>
+          <h2 id="capture-2-title">Precios y diferencia entre gamas</h2>
+        </header>
+        <figure>
+          <img
+            src="capturas/02-precios.png"
+            alt="Respuesta de seguimiento con los tres precios simulados y los registros de tienda citados."
+          >
+          <figcaption>
+            <span class="capture-number">CAPTURA 02</span>
+            La pregunta “¿Qué precio tiene cada uno? ¿Merece la pena pagar la
+            diferencia?” conserva el contexto de la comparación anterior. Los
+            precios llevan IVA y las fuentes indican que son ficticios.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="sheet capture-page" aria-labelledby="capture-3-title">
+        <div class="running-head"><span>03 · Chat</span><span>Canales de compra</span></div>
+        <header class="capture-title">
+          <p class="kicker">Respuesta contextual</p>
+          <h2 id="capture-3-title">A cada canal, su fuente</h2>
+        </header>
+        <figure>
+          <img
+            src="capturas/03-canales-de-compra.png"
+            alt="El chat enumera las tiendas ficticias Nova, Atlas y Orbit y aclara que no consta disponibilidad."
+          >
+          <figcaption>
+            <span class="capture-number">CAPTURA 03</span>
+            Ante “¿Dónde puedo comprarlos?”, el asistente usa el contexto
+            conversacional para identificar los tres modelos. También aclara
+            que las fuentes no especifican stock ni disponibilidad.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="sheet capture-page" aria-labelledby="capture-4-title">
+        <div class="running-head"><span>04 · Chat</span><span>Límite de la información</span></div>
+        <header class="capture-title">
+          <p class="kicker">Abstención respaldada por una fuente</p>
+          <h2 id="capture-4-title">Cuando el dato no consta</h2>
+        </header>
+        <figure>
+          <img
+            src="capturas/04-no-consta.png"
+            alt="Aviso de que no consta la fecha de fabricación del Atlas Equilibrio 14, con la ficha A01 citada."
+          >
+          <figcaption>
+            <span class="capture-number">CAPTURA 04</span>
+            La pregunta por la fecha de fabricación del Atlas Equilibrio 14
+            recibe un “No consta en los datos” y cita A01 · Identificación, cuyo
+            fragmento indica que la fecha no está indicada.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="sheet capture-page" aria-labelledby="capture-5-title">
+        <div class="running-head"><span>05 · Fuentes</span><span>Biblioteca documental</span></div>
+        <header class="capture-title">
+          <p class="kicker">Listado conectado al servidor</p>
+          <h2 id="capture-5-title">Seis documentos, tres fabricantes</h2>
+        </header>
+        <figure>
+          <img
+            src="capturas/05-documentos.png"
+            alt="Biblioteca con seis fichas técnicas y registros de tienda, buscador y filtros por fabricante y tipo."
+          >
+          <figcaption>
+            <span class="capture-number">CAPTURA 05</span>
+            La biblioteca muestra las seis fuentes simuladas y permite
+            localizarlas por texto, fabricante o tipo de documento.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="sheet" aria-labelledby="verified-title">
+        <div class="running-head"><span>Comprobación</span><span>Preguntas y evidencia · 1 de 2</span></div>
+        <p class="kicker">Cómo lo comprobé</p>
+        <h2 id="verified-title">Respuestas sobre la comparación</h2>
+        <p class="muted">
+          Hice las preguntas en la aplicación con el servidor activo y abrí los
+          fragmentos citados. Las fichas y las puntuaciones son demostrativas:
+          aquí se comprueba que la respuesta coincide con ese conjunto de
+          evidencia, no que describa productos reales.
+        </p>
+        <div class="check-list">
+          <article class="check-card">
+            <p class="question">
+              1. “Quiero un portátil para ofimática, estudiar y videollamadas.
+              Compara las gamas baja, media y alta. Dame una valoración general
+              puntuando cada ordenador.”
+            </p>
+            <p class="response">
+              <strong>Respondió:</strong> Nova 6,8/10; Atlas 8,7/10; Orbit
+              8,1/10. Recomendó Atlas como opción equilibrada para ese perfil.
+            </p>
+            <p class="sources">
+              <strong>Fuentes que debes abrir:</strong> M01 · Metodología; N01 ·
+              Configuración; A01 · Configuración; O01 · Rendimiento.
+              <span class="verdict">Coincide.</span>M01 contiene las tres notas
+              y la recomendación; las otras fichas respaldan las características
+              usadas en la comparación.
+            </p>
+          </article>
+          <article class="check-card">
+            <p class="question">
+              2. “¿Qué precio tiene cada uno? ¿Merece la pena pagar la diferencia?”
+            </p>
+            <p class="response">
+              <strong>Respondió:</strong> 449 €, 849 € y 1.699 € con IVA; la
+              diferencia baja-media es 400 € y media-alta 850 €. Consideró más
+              equilibrada la gama media para el uso descrito.
+            </p>
+            <p class="sources">
+              <strong>Fuentes que debes abrir:</strong> N02 · Precio; A02 ·
+              Precio; O02 · Precio; M01 · Metodología.
+              <span class="verdict">Coincide.</span>Los tres registros dan los
+              precios; la resta coincide y M01 describe la valoración y las
+              diferencias de precio.
+            </p>
+          </article>
+        </div>
+        <p class="small-note">
+          Para consultar N01, A01, O01, N02, A02 y O02, abre “Fuentes” en la
+          aplicación y selecciona el identificador correspondiente.
+        </p>
+      </section>
+
+      <section class="sheet" aria-labelledby="verified-followup-title">
+        <div class="running-head"><span>Comprobación</span><span>Preguntas y evidencia · 2 de 2</span></div>
+        <p class="kicker">Cómo lo comprobé</p>
+        <h2 id="verified-followup-title">Canales de compra y datos ausentes</h2>
+        <div class="check-list">
+          <article class="check-card">
+            <p class="question">3. “¿Dónde puedo comprarlos?”</p>
+            <p class="response">
+              <strong>Respondió:</strong> Nova Store España, Atlas Store España
+              y Orbit Store España; no consta el stock o la disponibilidad.
+            </p>
+            <p class="sources">
+              <strong>Fuentes que debes abrir:</strong> N02 · Venta; A02 ·
+              Venta; O02 · Venta.
+              <span class="verdict">Coincide.</span>Cada registro identifica
+              su canal y declara que stock/envío o disponibilidad no están
+              especificados.
+            </p>
+          </article>
+          <article class="check-card">
+            <p class="question">
+              4. “Me quedo con el Atlas Equilibrio 14. ¿Cuál es su fecha de fabricación?”
+            </p>
+            <p class="response">
+              <strong>Respondió:</strong> “No consta en los datos disponibles.”
+              No dedujo una fecha a partir del modelo.
+            </p>
+            <p class="sources">
+              <strong>Fuente que debes abrir:</strong> A01 · Identificación.
+              <span class="verdict">Coincide.</span>El fragmento dice
+              “Fecha de fabricación: no indicada”.
+            </p>
+          </article>
+        </div>
+
+        <aside class="caution">
+          <strong>Alcance de la comprobación.</strong> Los dominios `.example`,
+          fabricantes, fichas y precios son inventados para la maqueta. Abrir
+          una fuente confirma que la respuesta coincide con el registro local,
+          no que el producto, precio o canal exista en el mercado.
+        </aside>
+
+        <h3 style="margin-top: 15pt">Índice de fuentes para abrir en la biblioteca</h3>
+        <ul class="source-index">
+          <li><strong>N01</strong> Nova Esencial 15 · Ficha técnica</li>
+          <li><strong>N02</strong> Nova Esencial 15 · Registro de tienda</li>
+          <li><strong>A01</strong> Atlas Equilibrio 14 · Ficha técnica</li>
+          <li><strong>A02</strong> Atlas Equilibrio 14 · Registro de tienda</li>
+          <li><strong>O01</strong> Orbit Studio 16 · Ficha técnica</li>
+          <li><strong>O02</strong> Orbit Studio 16 · Registro de tienda</li>
+        </ul>
+        <p class="small-note">
+          <strong>M01 · Metodología</strong> se consulta en
+          <a href="maquetas.html">maquetas.html</a>, en el apartado “Cómo se
+          calcula la valoración ilustrativa”. Es la fuente local de las notas;
+          no forma parte de los seis documentos de producto de la biblioteca.
+        </p>
+      </section>
+
+      <section class="sheet" aria-labelledby="built-title">
+        <div class="running-head"><span>Implementación</span><span>Arquitectura y ejecución</span></div>
+        <p class="kicker">Cómo está hecho</p>
+        <h2 id="built-title">Un servidor privado, una interfaz conectada</h2>
+        <div class="architecture">
+          <article class="info-panel">
+            <h2>Servidor · Python</h2>
+            <p>
+              FastAPI en <code>servidor.py</code>. Divide las seis fichas en
+              fragmentos, busca por similitud de embeddings y conserva el
+              índice en <code>data/embeddings.npz</code>.
+            </p>
+            <ul>
+              <li><code>POST /api/preguntar</code>: pregunta, historial, respuesta y citas.</li>
+              <li><code>GET /api/documentos</code>: biblioteca y fragmentos.</li>
+              <li>Si la información falta o no es pertinente, responde “No consta”.</li>
+            </ul>
+          </article>
+          <article class="info-panel">
+            <h2>Interfaz · Svelte</h2>
+            <p>
+              Svelte 5 con TypeScript y Vite. El chat conserva el historial,
+              muestra fragmentos citados y permite filtrar y abrir documentos.
+            </p>
+            <p>
+              El navegador llama únicamente a rutas <code>/api</code>; Vite las
+              reenvía al servidor Python en el puerto 8000. La clave de API se
+              queda en el <code>.env</code> del servidor.
+            </p>
+          </article>
+          <article class="info-panel wide">
+            <h2>Modelos</h2>
+            <p>
+              Para generar respuestas se usa <strong>gpt-4o-mini</strong>. La
+              recuperación semántica usa embeddings de
+              <strong>text-embedding-3-small</strong>; sus vectores se
+              normalizan y se comparan localmente con NumPy. La consulta por
+              datos ausentes se resuelve con la evidencia disponible sin pedir
+              al modelo que invente una respuesta.
+            </p>
+          </article>
+          <article class="info-panel wide">
+            <h2>Cómo arrancarla</h2>
+            <p>Terminal 1 · desde la carpeta raíz del proyecto:</p>
+            <pre class="command-box">uv run servidor.py</pre>
+            <p style="margin-top: 8pt">Terminal 2 · desde <code>web/</code>:</p>
+            <pre class="command-box">npm run dev</pre>
+            <p style="margin-top: 8pt">
+              Abre <strong>http://127.0.0.1:5173/</strong>. Para reproducir las
+              capturas: desde <code>web/</code>, ejecuta
+              <code>node capturas.mjs</code> con ambos servicios activos y
+              Microsoft Edge instalado.
+            </p>
+          </article>
+        </div>
+        <p class="small-note">
+          La exportación de este informe se hace con Playwright Core y el Edge
+          instalado; no se descarga ni instala un navegador automatizado.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,60 +1,43 @@
-# Umbral · Proyecto final
+# Portátil ideal para tu día a día
 
-Preparación del asistente de compra de portátiles. `maquetas.html` es la referencia
-visual. La interfaz todavía conserva la plantilla inicial de Svelte; el RAG y
-el chat se construirán en los pasos siguientes.
+Umbral compara tres portátiles para ofimática, estudio y videollamadas. El chat
+responde con fragmentos citados y reconoce cuando un dato no consta.
 
-## Requisitos
+## Datos
 
-- Node.js LTS y npm (verificados con Node 24.20.0 y npm 11.19.0).
-- uv, que gestiona Python 3.12 y las dependencias; no se usa pip.
-- `.env` local con las claves y `HTTPS_PROXY`. Nunca se añade a Git.
+Seis registros ficticios de la maqueta: las fichas técnicas y los registros de
+tienda de Nova Esencial 15, Atlas Equilibrio 14 y Orbit Studio 16. Los productos,
+precios y canales no son ofertas reales. La valoración ilustrativa está en
+`maquetas.html`, apartado «Cómo se calcula la valoración ilustrativa».
 
-La configuración de usuario de npm usa el mismo proxy y https-proxy que
-`HTTPS_PROXY` del `.env`. Sus valores no se incluyen en este repositorio.
-En esta máquina Node y npm están instalados en la carpeta de usuario; si una
-terminal anterior no los encuentra, abre una terminal nueva.
+## Arranque
 
-## Instalar después de clonar
-
-```powershell
-uv sync
-cd web
-npm install
-```
-
-Si PowerShell bloquea npm.ps1 por su política de ejecución, usa `npm.cmd`.
-
-## Servidor Python (terminal 1, carpeta del proyecto)
+Terminal 1, desde la carpeta del proyecto:
 
 ```powershell
 uv run servidor.py
 ```
 
-API inicial: http://127.0.0.1:8000/api/salud
-Documentación: http://127.0.0.1:8000/docs
-Este servidor inicial no realiza llamadas a OpenAI.
-
-## Interfaz (terminal 2)
+Terminal 2:
 
 ```powershell
 cd web
+npm install
 npm run dev
 ```
 
-Abre http://127.0.0.1:5173. Vite reenvía `/api` a http://127.0.0.1:8000,
-sin quitar el prefijo. Por ejemplo, http://127.0.0.1:5173/api/salud llega al
-servidor Python. Las claves permanecen en el `.env` del servidor, fuera de `web/`.
-Si el puerto 8000 está ocupado por otra aplicación, detén esa aplicación antes
-de iniciar este servidor; no se modifica el puerto del proxy automáticamente.
+Abre <http://127.0.0.1:5173/>. La clave de OpenAI se configura en `.env` y solo
+la usa el servidor.
 
-## Comprobar la interfaz
+## Preguntas comprobadas
 
-```powershell
-cd web
-npm run check
-npm run build
-```
+- «Quiero un portátil para ofimática, estudiar y videollamadas. Compara las gamas baja, media y alta. Dame una valoración general puntuando cada ordenador.»
+- «¿Qué precio tiene cada uno? ¿Merece la pena pagar la diferencia?»
+- «¿Dónde puedo comprarlos?»
+- «Me quedo con el Atlas Equilibrio 14. ¿Cuál es su fecha de fabricación?»
 
-`uv.lock` y `web/package-lock.json` fijan las dependencias. `.env`, `.venv`,
-`node_modules`, las bases de datos y sus respaldos se excluyen mediante `.gitignore`.
+La última pregunta responde que no consta y cita A01 · Identificación.
+
+## Entregable
+
+[Abrir el informe PDF](entregable.pdf) · [Ver el informe HTML](entregable.html)
