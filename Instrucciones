@@ -1,0 +1,106 @@
+Ejercicio · Fijado
+16/10/26, 10:56
+Proyecto final: tu aplicación con chat sobre tus datos
+Vas a construir una aplicación web con una interfaz conversacional que responde solo con tus datos y cita de dónde sale cada respuesta (RAG, como en Un asistente sobre tu documentación). El tema lo eliges tú: documentación oficial del BOCYL, una base de datos de motos, un catálogo de productos de compra, las instrucciones de tu servicio… lo que quieras.
+
+Trabaja en una carpeta nueva, proyecto-final, abierta en una ventana nueva de VS Code, con tu .env (clave y proxy) copiado de la carpeta iagen-api-casos.
+
+De dónde salen los datos:
+
+Documentos públicos (BOCYL, normativa): ya los tienes en iagen-api-casos/boletines/.
+Una base de datos (motos, productos): que Codex los genere con código, como los 10.000 registros del día 3.
+Nada de datos personales reales, y no descargues de webs de segunda mano en directo: si quieres ese caso, guarda unas páginas en local o genera datos parecidos.
+Paso 1 · Las maquetas (razonamiento Ultra)
+Antes de construir nada, Codex dibuja la aplicación. En el selector de modelo, elige GPT-6.1 Sol y el nivel Ultra. Si no te aparece, usa Extra High. No uses el modo plan aquí: en modo plan Codex solo propone y no crea el fichero.
+
+Mensaje 1: maquetas de la aplicación
+Ultra (o Extra High), sin modo plan. Cuando lo tengas, abre maquetas.html en el navegador y pide cambios hasta que sea la aplicación que quieres.
+
+De qué va tu aplicación
+un asistente para consultar los anuncios del BOCYL sobre ayudas y plazos
+
+De dónde salen los datos
+los 18 anuncios de la carpeta boletines/ de iagen-api-casos
+
+Tres preguntas que debe saber responder
+¿qué plazo hay para presentar alegaciones en la concentración parcelaria de X?; ¿qué ayudas hay para jóvenes agricultores?; ¿quién firma la convocatoria de Y?
+
+Una pregunta que NO debe poder responder
+¿cuántas solicitudes se presentaron el año pasado?
+
+El prompt que vas a pegar
+Copiar prompt
+Quiero una aplicación web: [De qué va tu aplicación]. Los datos salen de [De dónde salen los datos].
+
+Crea un único fichero maquetas.html, sin librerías externas y con datos inventados pero realistas, que muestre una debajo de otra cada página de la aplicación, como maquetas:
+- El chat: la conversación con estas preguntas de ejemplo y sus respuestas: [Tres preguntas que debe saber responder]. Debajo de cada respuesta, las fuentes que la justifican (documento o registro y fragmento).
+- La misma conversación cuando le pregunto: [Una pregunta que NO debe poder responder]. Debe responder que no consta en los datos, sin inventar.
+- Un listado o buscador de los documentos o registros que tiene la aplicación.
+- Cualquier otra página que la aplicación necesite.
+
+Que se vea como una aplicación real: un diseño limpio y coherente, y que funcione en una pantalla de portátil.
+Rellena para poder copiarlo: De qué va tu aplicación · De dónde salen los datos · Tres preguntas que debe saber responder · Una pregunta que NO debe poder responder
+
+Paso 2 · Preparar el proyecto (razonamiento Medium)
+Cambia el nivel a Medium: a partir de aquí ya sabes qué construir, y Medium basta. La aplicación tiene dos partes: el servidor en Python (los datos, el RAG y la llamada a la API, como en rag.py) y la interfaz en Svelte (las páginas de tus maquetas).
+
+Mensaje 2: comprobar el entorno y crear el proyecto
+Si node o npm no funcionan, avisa en el Tablón antes de seguir.
+
+El prompt que vas a pegar
+Copiar prompt
+Prepara el proyecto en esta carpeta, paso a paso y diciéndome qué hace cada comando antes de ejecutarlo:
+1. Comprueba si están instalados Node.js y npm (node -v y npm -v). Si no están, para y dímelo.
+2. Configura npm para usar el mismo proxy que HTTPS_PROXY del .env (npm config set proxy y npm config set https-proxy).
+3. El servidor en Python con uv (uv init, y las librerías con uv add, nunca pip): openai, python-dotenv, numpy y fastapi con uvicorn.
+4. La interfaz en una carpeta web/ con Vite y Svelte en TypeScript, sin preguntas interactivas: npm create vite@latest web -- --template svelte-ts, y npm install dentro de web/.
+5. Configura el servidor de desarrollo de Vite para que las peticiones a /api vayan al servidor Python en el puerto 8000.
+6. Un .gitignore con .env, .venv, node_modules y la base de datos, y git init con un primer commit.
+Paso 3 · Construirla
+Mensaje 3: el servidor con el RAG
+Pruébalo con curl antes de pasar a la interfaz, y haz un commit.
+
+El prompt que vas a pegar
+Copiar prompt
+Con @maquetas.html como especificación y ../iagen-api-casos/rag.py como referencia del RAG, crea el servidor en Python (servidor.py, arranca con uv run servidor.py en el puerto 8000):
+- Prepara los datos (cópialos o genéralos con código) y un índice de búsqueda con embeddings, guardado en disco para no recalcularlo en cada arranque.
+- POST /api/preguntar: recibe la pregunta y el historial de la conversación y devuelve la respuesta y sus fuentes, con salida estructurada. Si no hay nada parecido en los datos, responde que no consta, sin llamar al modelo para inventar.
+- GET /api/documentos: el listado que necesita la página de documentos.
+La clave sigue en el .env. Cuando termines, dime los comandos curl para probar las tres preguntas de las maquetas y la que no debe saber responder.
+Mensaje 4: la interfaz en Svelte
+Arranca el servidor en un terminal y la interfaz en otro (npm run dev dentro de web/). Commit cuando funcione.
+
+El prompt que vas a pegar
+Copiar prompt
+Construye la interfaz en web/ con Svelte, siguiendo @maquetas.html página a página: el chat con las fuentes bajo cada respuesta, el aviso cuando no consta y el listado de documentos. Usa solo las rutas /api del servidor; la clave nunca llega al navegador. Dime cómo arrancar las dos partes y qué dirección abrir.
+Paso 4 · Compruébalo y entrégalo
+Haz en la aplicación las tres preguntas de tus maquetas: ¿la respuesta es correcta? Abre la fuente que cita y comprueba que dice lo mismo.
+Haz la pregunta que no debe saber: ¿dice que no consta, o se lo inventa?
+Comprueba que .env no está en Git.
+Después rellena la Entrega del proyecto final en la lección y prepara tus cinco minutos: el problema, la aplicación funcionando, qué comprobaste y qué falta.
+
+Si te atascas en cualquier paso, responde a este ejercicio contando dónde: solo lo verá el formador.
+
+Lecciones para combinar
+
+proyecto final practica
+rag practica
+Responder al ejercicioSolo el formador verá las respuestas
+Ejercicio
+16/10/26, 9:10
+Laboratorio: extraer datos de los boletines del BOCYL
+Ahora toca trabajar por vuestra cuenta en la práctica Extraer datos de boletines oficiales. Descargáis 18 anuncios del BOCYL en PDF y XML, sacáis cada dato con el método más barato que lo resuelve (metadatos, reglas o el modelo) y medís los aciertos contra 5 anuncios revisados a mano.
+
+Descarga los materiales del módulo y abre la carpeta iagen-api-casos en una ventana nueva de VS Code.
+Crea el notebook boletines.ipynb y ve pegando los mensajes de la práctica en Codex, de uno en uno, ejecutando las celdas antes de pasar al siguiente.
+Si el proxy no te deja descargar de bocyl.jcyl.es, no te atasques: usa la carpeta boletines/, que trae los 18 anuncios ya convertidos y sus metadatos.
+Cuando termines, responde aquí con:
+
+cuántos datos sacaste sin gastar tokens (metadatos y reglas) y cuántos con el modelo;
+el porcentaje de aciertos contra los 5 anuncios revisados;
+el campo en el que más se equivocó el modelo, y por qué crees que fue.
+Las respuestas las verá toda la clase: así comparamos resultados al final.
+
+Lecciones para combinar
+
+extraer boletines practica
